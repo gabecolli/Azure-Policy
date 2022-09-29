@@ -28,15 +28,15 @@
             },
             "then": {
                 "effect": "modify",
-                "details" : {
-                    "operations" : [
-                        {
-                            "operation": "add",
-                            "field": "[concat('tags[', parameters('tagName'), ']')]",
-                            "value": "[parameters('tagValue')]"
-                        }
-                    ]
-                }
+                
+                "operations" : [
+                    {
+                        "operation": "add",
+                        "field": "[concat('tags[', parameters('tagName'), ']')]",
+                        "value": "[parameters('tagValue')]"
+                    }
+                ]
+                
             }
         }
     }
