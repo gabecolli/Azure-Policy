@@ -4,14 +4,6 @@
         "description": "checking to see how many owners",
         "mode": "All",
         "parameters": {
-                "subscription" : {
-                    "type" : "String",
-                    "metadata" : {
-                        "displayName" : "subid",
-                        "description" : "checking to see how many owners"
-                    },
-                    "defaultvalue" : "Microsoft.Resoucres/subscriptions().id"
-                },
                 "owners": {
                     "type": "String",
                     "metadata": {
@@ -27,15 +19,7 @@
                 "notequals": "6"
             },
             "then": {
-                "effect": "modify",
-                
-                "operations" : [
-                    {
-                        "operation": "add",
-                        "field": "[concat('tags[', parameters('tagName'), ']')]",
-                        "value": "[parameters('tagValue')]"
-                    }
-                ]
+                "effect": "audit"
                 
             }
         }
