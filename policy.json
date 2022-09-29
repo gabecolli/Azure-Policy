@@ -1,27 +1,30 @@
 {
-    "properties": {
-        "displayName": "A minimum and maximum of 6 owners should be designated for your subscription",
-        "description": "checking to see how many owners",
-        "mode": "All",
-        "parameters": {
-                "owners": {
-                    "type": "String",
-                    "metadata": {
-                      "displayName": "countofowners",
-                      "description": "Count owners based on tagvalue"
-                    },
-                    "defaultValue": "Microsoft.Resources/subscriptions().tags.value"
-                  }
-        },
-        "policyRule": {
-            "if": {
-                "field": "[parameters('owners')]",
-                "notequals": "6"
-            },
-            "then": {
-                "effect": "audit"
-                
-            }
+    "mode" : "All",
+    "parameters": {
+        "tagName": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Tag Name",
+            "description": "Name of the tag, such as 'environment'"
+          }
         }
-    }
+        
+    },
+    "policyRule" : {
+        "if" : {
+            "allof" : [
+                {
+                    "field" : "type",
+                    "equals" : "Microsoft.Resources/subscriptions"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName'), ']')]",
+                    "notequals" : 6
+                }
+            ]
+        },
+        "then" : {
+            "effect" : "audit"
+        }
+    }    
 }
